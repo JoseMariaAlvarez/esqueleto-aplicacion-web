@@ -77,7 +77,7 @@ Este es un servidor Node.js / Express mínimo que simula algunas característica
 
 ```
 servidor/
-├── server.js                  ← Punto de entrada - inicia Express
+├── servidor.js                  ← Punto de entrada - inicia Express
 ├── usersDB.js                 ← Almacenamiento en memoria del usuario (sustituir por base de datos)
 ├── users.js                   ← Operaciones de consulta y actualización de usuarios
 ├── routes/
@@ -181,4 +181,4 @@ Devuelve `{ "status": "ok", "time": "..." }`.
 - Sustituye el contenido de `usersDB.js` con consultas reales a una base de datos.
 - Habilita HTTPS en producciónn (termina TLS en un _proxy_ inverso como nginx).
 - Añade una política de _rate-limiting_ to `/auth/login` (p.ej. `express-rate-limit`) para prevenir ataques de fuerza bruta.
-- No incluyas nunca `.env` en los _commit_ del control de versiones.
+- En un sistema real no incluyas nunca `.env` en los _commit_ del control de versiones cuando ya se le ha dado un valor bueno a `JWT_SECRET`.

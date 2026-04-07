@@ -1,10 +1,10 @@
 /**
- * server.js
+ * servidor.js
  *
  * WorkForce Schedule Manager — API Server
  *
- * Start:       node server.js
- * Development: npx nodemon server.js
+ * Start:       node servidor.js
+ * Development: npx nodemon servidor.js
  */
 
 // require('dotenv').config();
