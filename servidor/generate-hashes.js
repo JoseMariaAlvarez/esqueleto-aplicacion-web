@@ -9,7 +9,7 @@
  * Delete this file before deploying to production.
  */
 
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 const ROUNDS = 10;
 
 const credentials = [
