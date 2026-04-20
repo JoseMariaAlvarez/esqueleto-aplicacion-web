@@ -1,4 +1,3 @@
-const API_ENDPOINT = 'http://localhost:3000/auth/login';
 const PAGINAS_POR_PUESTO = {
   admin: 'admin.html',
   manager: 'manager.html',
@@ -13,37 +12,33 @@ document.querySelector('#login-form').addEventListener('submit', async function 
   const message = document.querySelector('#message');
 
   message.textContent = 'Iniciando sesión...';
-
   try {
-    const response = await fetch(API_ENDPOINT + 
-      `?nombreUsuario=${encodeURIComponent(nombreUsuario)}&contrasena=${encodeURIComponent(contrasena)}`, {
-    });
-    // const response = await fetch(API_ENDPOINT, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ nombreUsuario, contrasena })
-    // });
+    iniciarSesion(nombreUsuario, contrasena) // funcion asíncrona, devuelve una promesa
+      .then(datosInicioSesion => {
+        if (datosInicioSesion.token && datosInicioSesion.user && datosInicioSesion.user.puesto) {
+          // Store auth data for use in subsequent pages.
+          sessionStorage.setItem('token', datosInicioSesion.token);
+          sessionStorage.setItem('user', JSON.stringify(datosInicioSesion.user));
 
-    const data = await response.json();
+          const targetPage = PAGINAS_POR_PUESTO[datosInicioSesion.user.puesto];
 
-    if (response.ok && data.token && data.user && data.user.puesto) {
-      // Store auth data for use in subsequent pages.
-      sessionStorage.setItem('token', data.token);
-      sessionStorage.setItem('user', JSON.stringify(data.user));
+          if (!targetPage) {
+            message.textContent = 'Error: puesto no reconocido.';
+            return;
+          }
+          message.textContent = 'Inicio de sesión correcto. Redirigiendo...';
+          window.location.href = targetPage;
+        } else {
+          message.textContent = 'Error: ' + (data || 'Credenciales inválidas.');
+        }})
+      .catch(err => {
+        message.textContent = 'Error en el inicio de sesión: ' + err;
+        console.error('Error en el inicio de sesión: ', err);
+      })
 
-      const targetPage = PAGINAS_POR_PUESTO[data.user.puesto];
-
-      if (!targetPage) {
-        message.textContent = 'Error: puesto no reconocido.';
-        return;
-      }
-
-      message.textContent = 'Inicio de sesión correcto. Redirigiendo...';
-      window.location.href = targetPage;
-    } else {
-      message.textContent = 'Error: ' + (data.message || 'Credenciales inválidas.');
-    }
   } catch (err) {
-    message.textContent = 'Could not reach the server: ' + err.message;
+    message.textContent = 'Error en inicio de sesión: ' + err;
+    console.error('Error en inicio de sesión: ', err);
   }
+
 });

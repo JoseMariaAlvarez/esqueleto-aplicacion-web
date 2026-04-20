@@ -106,8 +106,8 @@ function mostrarModalModificarUsuario(e) {
 
     try {
       const usuAct = putUsuarioActualizado(datosActualizados);
+      usuAct.then(() => {  // funcion asíncrona, devuelve una promesa
       // Actualizar la tabla con los nuevos datos (sin recargar la página)
-      usuAct.then(() => {
         usuarioMod.nombre = datosActualizados.nombre;
         usuarioMod.email = datosActualizados.email;
         usuarioMod.puesto = datosActualizados.puesto;
@@ -128,7 +128,7 @@ function mostrarModalModificarUsuario(e) {
 
 let usuariosCargados = [];
 try {
-  cargarUsuarios().then(usuarios => {
+  cargarUsuarios().then(usuarios => {  // funcion asíncrona, devuelve una promesa
     usuariosCargados = usuarios;
     rellenarTablaUsuarios(usuariosCargados);
   }).catch(err => {
