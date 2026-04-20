@@ -5,12 +5,12 @@ const PAGINAS_POR_PUESTO = {
   worker: 'worker.html'
 };
 
-document.getElementById('login-form').addEventListener('submit', async function (e) {
+document.querySelector('#login-form').addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  const nombreUsuario = document.getElementById('username').value.trim();
-  const contrasena = document.getElementById('password').value;
-  const message = document.getElementById('message');
+  const nombreUsuario = document.querySelector('#username').value.trim();
+  const contrasena = document.querySelector('#password').value;
+  const message = document.querySelector('#message');
 
   message.textContent = 'Iniciando sesión...';
 

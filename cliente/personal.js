@@ -12,7 +12,7 @@ document.querySelector('#btn-cierre-sesion').addEventListener('click', function 
 });
 
 function rellenarTablaUsuarios(usuarios) {
-  const tabla = document.getElementById('tabla-usuarios');
+  const tabla = document.querySelector('#tabla-usuarios');
 
   // Eliminar filas anteriores antes de agregar nuevas 
   // (para evitar duplicados en caso de recarga o múltiples llamadas)  
