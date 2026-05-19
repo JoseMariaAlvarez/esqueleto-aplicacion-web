@@ -5,14 +5,14 @@ const API_ENDPOINT = 'http://localhost:3000';
 // Intento de inicio de sesión
 async function iniciarSesion(nombreUsuario, contrasena){
     console.log('Intentando iniciar sesión con:', nombreUsuario, contrasena);
-      const respuestaInicioSesion = await fetch(API_ENDPOINT + "/auth/login" + 
-      `?nombreUsuario=${encodeURIComponent(nombreUsuario)}&contrasena=${encodeURIComponent(contrasena)}`, {
-    });
-    // const respuestaInicioSesion = await fetch(API_ENDPOINT + "/auth/login", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ nombreUsuario, contrasena })
+    // const respuestaInicioSesion = await fetch(API_ENDPOINT + "/auth/login" + 
+    //   `?nombreUsuario=${encodeURIComponent(nombreUsuario)}&contrasena=${encodeURIComponent(contrasena)}`, {
     // });
+    const respuestaInicioSesion = await fetch(API_ENDPOINT + "/auth/login", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombreUsuario, contrasena })
+    });
     console.log('Respuesta de fetch:', respuestaInicioSesion);
     if(respuestaInicioSesion.ok){
 
